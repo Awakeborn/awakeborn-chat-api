@@ -2,7 +2,7 @@ import sys
 sys.path.append('/root/awakeborn/Awakeborn')
 
 from awakeborn_llm_connector import query_local_llm
-from serpapi.google_search import GoogleSearch
+from serpapi import GoogleSearch
 import json
 
 SERP_API_KEY = "11f93cd09452d24f41a87a1c80a5071d18ff08152d05a89660d644af6299f6e8"
