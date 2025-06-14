@@ -1,22 +1,18 @@
 import requests
 
-API_KEY = "your_openai_api_key"  # replace with your actual OpenAI API key
-url = "https://api.openai.com/v1/chat/completions"
+# Use OpenRouter or Ollama Cloud (permanent, free, fast)
+API_ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
+API_KEY = "YOUR_OPENROUTER_API_KEY"  # Get from https://openrouter.ai
 
 def query_local_llm(prompt):
     headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {API_KEY}"
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json"
     }
-
     data = {
-        "model": "gpt-3.5-turbo",  # or "gpt-4" if you prefer
+        "model": "mistralai/mixtral-8x7b-instruct", 
         "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.7
+        "max_tokens": 1000
     }
-
-    response = requests.post(url, json=data, headers=headers)
-    response.raise_for_status()
-
-    reply = response.json()
-    return reply['choices'][0]['message']['content']
+    response = requests.post(API_ENDPOINT, json=data, headers=headers)
+    return response.json()['choices'][0]['message']['content']
